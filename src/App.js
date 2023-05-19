@@ -10,6 +10,7 @@ import ManageUsers from "./components/main/ManageUsers";
 import Main from "./components/main";
 import User from "./components/user";
 import UserProfile from "./components/user/UserProfile";
+import databaseConection from "./components/user/databaseConnection";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           </Route>
           <Route path="user" element={<User />} >
             <Route path="profile" element={<UserProfile />} />
+            <Route path="databaseConnection" element={<databaseConection />} />
           </Route>
         </Routes>
       </BrowserRouter>
