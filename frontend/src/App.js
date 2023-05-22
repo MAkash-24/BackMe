@@ -10,7 +10,8 @@ import ManageUsers from "./components/main/ManageUsers";
 import Main from "./components/main";
 import User from "./components/user";
 import UserProfile from "./components/user/UserProfile";
-import databaseConection from "./components/user/databaseConnection";
+import UserLanding from "./components/user/UserLanding";
+import DatabaseConvertor from "./components/user/DatabaseConvertor";
 
 function App() {
   return (
@@ -27,8 +28,10 @@ function App() {
             <Route path="manageUser" element={<ManageUsers />} />
           </Route>
           <Route path="user" element={<User />} >
+            <Route path="userLanding" element={<UserLanding/>}/>
             <Route path="profile" element={<UserProfile />} />
-            <Route path="databaseConnection" element={<databaseConection />} />
+          
+            <Route path="databaseConverter" element={<DatabaseConvertor/>}/>
           </Route>
         </Routes>
       </BrowserRouter>

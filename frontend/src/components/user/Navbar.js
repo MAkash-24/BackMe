@@ -8,7 +8,7 @@ const Navbar = () => {
   return (
     <>
       {/* Navbar */}
-      <nav className="navbar navbar-expand-md " style={{ backgroundColor: "#e3f2fd" }}>
+      <nav className="navbar navbar-expand-md " style={{ backgroundColor: "#33d2c2" }}>
         {/* Container wrapper */}
         <div className="container">
           {/* Toggle button */}
@@ -41,11 +41,12 @@ const Navbar = () => {
                   User Profile
                 </NavLink>
               </li>
-              <li className="nav-item">
-                <NavLink className="nav-link" to="/user/databaseConnection">
+              {/* <li className="nav-item">
+                <NavLink className="nav-link" to="/user/databaseConverter">
                   Migrate data
                 </NavLink>
-              </li>
+              </li> */}
+              
             </ul>
             {/* Left links */}
           </div>

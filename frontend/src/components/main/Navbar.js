@@ -27,8 +27,12 @@ const Navbar = () => {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             {/* Navbar brand */}
             <a className="navbar-brand mt-2 mt-lg-0" href="#">
-              <img src="C:\Users\maury\OneDrive\Desktop\BackMe\frontend\public\images\back2.svg" alt="image" />
-              
+            <img
+                src="https://mdbcdn.b-cdn.net/img/logo/mdb-transaprent-noshadows.webp"
+                height={15}
+                alt="MDB Logo"
+                loading="lazy"
+              />              
               
 
 

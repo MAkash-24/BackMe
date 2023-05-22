@@ -113,7 +113,7 @@ const DatabaseConvertor = () => {
 
   return (
     <div>
-      <section className="container">
+      <section className="container-fluid my-5 p-5">
         <div className="row">
           <div className="col-md-6">
             <h2>Select First Database</h2>

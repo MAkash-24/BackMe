@@ -32,7 +32,7 @@ const Login = () => {
           text: "You have successfully logged in",
         });
         
-        navigate('/user/profile');
+        navigate('/user/userLanding');
 
       } else if (res.status === 401) {
         Swal.fire({
