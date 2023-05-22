@@ -5,6 +5,7 @@ const port = 5000;
 
 const userRouter = require('./routers/userRouter');
 const dbUtilRouter = require('./routers/DBUtils');
+const apiRouter = require('./routers/apiRouter');
 const cors = require('cors');
 
 app.use(cors({ origin: 'http://localhost:3000'}));
@@ -12,6 +13,7 @@ app.use(express.json());
 
 app.use('/user', userRouter);
 app.use('/dbutil', dbUtilRouter);
+app.use('/api', apiRouter);
 
 app.get('/', (req, res) => {
     res.send('Working fine');
