@@ -26,6 +26,7 @@ const DatabaseConvertor = () => {
       username: "",
       password: "",
       database: "",
+      table: ""
     },
     onSubmit: (values) => {
       console.log(values);
@@ -34,11 +35,13 @@ const DatabaseConvertor = () => {
 
   const dbTwoForm = useFormik({
     initialValues: {
+      uri: "",
       host: "",
       port: "",
       username: "",
       password: "",
       database: "",
+      table: ""
     },
     onSubmit: (values) => {
       console.log(values);
@@ -49,7 +52,7 @@ const DatabaseConvertor = () => {
   useEffect(() => {
     initDbs();
   }, [])
-  
+
 
   const DatabaseConfigOne = () => {
     if (dbFirst !== null) {
@@ -64,6 +67,7 @@ const DatabaseConvertor = () => {
                 <input className="form-control mb-3" name="username" value={dbOneForm.values.username} onChange={dbOneForm.handleChange} placeholder="username" />
                 <input className="form-control mb-3" name="password" value={dbOneForm.values.password} onChange={dbOneForm.handleChange} placeholder="password" />
                 <input className="form-control mb-3" name="database" value={dbOneForm.values.database} onChange={dbOneForm.handleChange} placeholder="database" />
+                <input className="form-control mb-3" name="table" value={dbOneForm.values.table} onChange={dbOneForm.handleChange} placeholder="table" />
                 <button type="submit" className="btn btn-primary">Submit</button>
               </form>
               <div>
@@ -75,7 +79,7 @@ const DatabaseConvertor = () => {
       );
     }
   };
-  
+
   const DatabaseConfigTwo = () => {
     if (dbSecond !== null) {
       return (
@@ -84,11 +88,13 @@ const DatabaseConvertor = () => {
           <div className="card">
             <div className="card-body">
               <form onSubmit={dbTwoForm.handleSubmit}>
+                <input className="form-control mb-3" name="uri" value={dbTwoForm.values.uri} onChange={dbTwoForm.handleChange} placeholder="uri" />
                 <input className="form-control mb-3" name="host" value={dbTwoForm.values.host} onChange={dbTwoForm.handleChange} placeholder="host" />
                 <input className="form-control mb-3" name="port" value={dbTwoForm.values.port} onChange={dbTwoForm.handleChange} placeholder="port" />
                 <input className="form-control mb-3" name="username" value={dbTwoForm.values.username} onChange={dbTwoForm.handleChange} placeholder="username" />
                 <input className="form-control mb-3" name="password" value={dbTwoForm.values.password} onChange={dbTwoForm.handleChange} placeholder="password" />
                 <input className="form-control mb-3" name="database" value={dbTwoForm.values.database} onChange={dbTwoForm.handleChange} placeholder="database" />
+                <input className="form-control mb-3" name="table" value={dbTwoForm.values.table} onChange={dbTwoForm.handleChange} placeholder="table" />
                 <button type="submit" className="btn btn-primary">Submit</button>
                 <p className="h4">Connection Status : {db2ConnStatus ? 'Connected' : 'Not Connected'}</p>
               </form>
@@ -105,11 +111,31 @@ const DatabaseConvertor = () => {
     setDbFirst(db);
   };
 
-    const selectDatabaseTwo = (e) => {
-        let db = dbOptions[dbTwoType][parseInt(e.target.value)];
-        console.log(db);
-        setDbSecond(db);
-    };
+  const selectDatabaseTwo = (e) => {
+    let db = dbOptions[dbTwoType][parseInt(e.target.value)];
+    console.log(db);
+    setDbSecond(db);
+  };
+
+  const startConvertion = async () => {
+    console.log(dbOneForm.values);
+    const res = await fetch('http://localhost:5000/dbutil/transfer', {
+      method: 'POST',
+      body: JSON.stringify({
+        options: {
+          from: 'MySQL',
+          to: 'MongoDB',
+          type: 'SQLtoNoSQL'
+        },
+        SQLDetails: dbOneForm.values,
+        NoSQLDetails: dbTwoForm.values
+      }),
+      headers: {
+        'Content-Type' : 'application/json'
+      }
+    })
+    console.log(res.status);
+  }
 
   return (
     <div>
@@ -146,7 +172,7 @@ const DatabaseConvertor = () => {
 
             <hr />
             <select className="form-control" onChange={selectDatabaseOne}>
-              {dbOptions[dbOneType].map(({name}, index) => (
+              {dbOptions[dbOneType].map(({ name }, index) => (
                 <option key={index} value={index}>
                   {name}
                 </option>
@@ -155,7 +181,7 @@ const DatabaseConvertor = () => {
             <hr />
 
             {
-                DatabaseConfigOne()
+              DatabaseConfigOne()
             }
           </div>
           <div className="col-md-6">
@@ -200,6 +226,8 @@ const DatabaseConvertor = () => {
             {DatabaseConfigTwo()}
           </div>
         </div>
+
+        <button className="btn btn-primary" onClick={startConvertion}>Convert</button>
       </section>
     </div>
   );
