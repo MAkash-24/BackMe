@@ -4,6 +4,7 @@ const router = require('express').Router();
 
 router.post('/transfer', (req, res) => {
     const { options, SQLDetails, NoSQLDetails } = req.body;
+    
     console.log(req.body);
     if(options.type === 'SQLtoNoSQL'){
         getMySQLData(SQLDetails, (data) => {

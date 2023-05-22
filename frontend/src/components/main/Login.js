@@ -31,8 +31,10 @@ const Login = () => {
           title: "Nice",
           text: "You have successfully logged in",
         });
-        
-        navigate('/user/userLanding');
+        const data =  await res.json();
+
+        sessionStorage.setItem('user', JSON.stringify(data));
+        navigate('/user/profile');
 
       } else if (res.status === 401) {
         Swal.fire({
