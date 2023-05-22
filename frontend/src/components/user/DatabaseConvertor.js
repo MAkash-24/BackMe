@@ -118,7 +118,7 @@ const DatabaseConvertor = () => {
   };
 
   const startConvertion = async () => {
-    console.log(dbOneForm.values);
+    console.log(dbTwoForm.values);
     const res = await fetch('http://localhost:5000/dbutil/transfer', {
       method: 'POST',
       body: JSON.stringify({

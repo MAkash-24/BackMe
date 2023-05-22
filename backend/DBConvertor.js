@@ -59,12 +59,12 @@
 //   .finally(() => client.close());
 
 
-const getMySQLData = ({host, user, password, database, table}, cb) => {
+const getMySQLData = ({host, username, password, database, table}, cb) => {
   let dbRows = [];
   const mysql = require('mysql')
   const connection = mysql.createConnection({
     host,
-    user,
+    user: username,
     password,
     database
   })
@@ -74,14 +74,14 @@ const getMySQLData = ({host, user, password, database, table}, cb) => {
   connection.query(`SELECT * FROM ${table}`, (err, rows, fields) => {
     if (err) throw err
 
-    displayRows(rows);
+    // displayRows(rows);
     dbRows = rows;
     cb(rows);
   
   })
 };
 
-const storeMongoData = async ({uri, data}) => {
+const storeMongoData = async ({uri}, data) => {
   const { MongoClient } = require('mongodb');
   const client = new MongoClient(uri);
 
