@@ -81,7 +81,7 @@ const getMySQLData = ({host, username, password, database, table}, cb) => {
   })
 };
 
-const storeMongoData = async ({uri, data}) => {
+const storeMongoData = async ({uri}, data) => {
   const { MongoClient } = require('mongodb');
   const client = new MongoClient(uri);
 
