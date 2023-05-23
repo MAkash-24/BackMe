@@ -41,11 +41,11 @@ const Navbar = () => {
                   User Profile
                 </NavLink>
               </li>
-              {/* <li className="nav-item">
+              <li className="nav-item">
                 <NavLink className="nav-link" to="/user/databaseConverter">
                   Migrate data
                 </NavLink>
-              </li> */}
+              </li>
               
             </ul>
             {/* Left links */}
