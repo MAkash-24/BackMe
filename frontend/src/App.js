@@ -12,7 +12,6 @@ import User from "./components/user";
 import UserProfile from "./components/user/UserProfile";
 import UserLanding from "./components/user/UserLanding";
 import DatabaseConvertor from "./components/user/DatabaseConvertor";
-import Feedback from "./components/user/Feedback";
 
 function App() {
   return (
@@ -31,8 +30,6 @@ function App() {
           <Route path="user" element={<User />} >
             <Route path="userLanding" element={<UserLanding/>}/>
             <Route path="profile" element={<UserProfile />} />
-            <Route path="feedback" element={<Feedback />} />
-
           
             <Route path="databaseConverter" element={<DatabaseConvertor/>}/>
           </Route>
