@@ -12,6 +12,7 @@ import User from "./components/user";
 import UserProfile from "./components/user/UserProfile";
 import UserLanding from "./components/user/UserLanding";
 import DatabaseConvertor from "./components/user/DatabaseConvertor";
+import APIGenerator from "./components/user/APIGenerator";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
             <Route path="profile" element={<UserProfile />} />
           
             <Route path="databaseConverter" element={<DatabaseConvertor/>}/>
+            <Route path="apiGenerator" element={<APIGenerator/>}/>
           </Route>
         </Routes>
       </BrowserRouter>
