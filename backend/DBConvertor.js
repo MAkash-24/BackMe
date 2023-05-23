@@ -91,7 +91,6 @@ const storeMongoData = async ({uri}, data) => {
   const collection = db.collection('documents');
   // await collection.insertMany(dbRows);
   await collection.insertMany(data);
-
 }
 
 module.exports = {getMySQLData, storeMongoData};
