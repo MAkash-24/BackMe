@@ -58,38 +58,86 @@
 //   .finally(() => client.close());
 
 
-const getMySQLData = ({host, username, password, database, table}, cb) => {
-  let dbRows = [];
-  const mysql = require('mysql')
+// const getMySQLData = ({host, username, password, database, table}, cb) => {
+//   let dbRows = [];
+//   const mysql = require('mysql')
+//   const connection = mysql.createConnection({
+//     host,
+//     user: username,
+//     password,
+//     database
+//   })
+  
+//   connection.connect()
+  
+//   connection.query(`SELECT * FROM ${table}`, (err, rows, fields) => {
+//     if (err) throw err
+
+//     // displayRows(rows);
+//     dbRows = rows;
+//     cb(rows);
+  
+//   })
+// };
+
+// const storeMongoData = async ({uri}, data) => {
+//   const { MongoClient } = require('mongodb');
+//   const client = new MongoClient(uri);
+
+//   await client.connect();
+//   console.log('Connected successfully to server');
+//   const db = client.db();
+//   const collection = db.collection('documents');
+//   // await collection.insertMany(dbRows);
+//   await collection.insertMany(data);
+// }
+
+// module.exports = {getMySQLData, storeMongoData};
+
+const getMongoData = ({ uri, collectionName }, cb) => {
+  const { MongoClient } = require('mongodb');
+  const client = new MongoClient(uri);
+
+  client.connect((err) => {
+    if (err) throw err;
+    console.log('Connected successfully to MongoDB');
+
+    const db = client.db();
+    const collection = db.collection(collectionName);
+
+    collection.find({}).toArray((err, data) => {
+      if (err) throw err;
+
+      client.close();
+      cb(data);
+    });
+  });
+};
+
+const storeMySQLData = ({ host, username, password, database, table }, data) => {
+  const mysql = require('mysql');
   const connection = mysql.createConnection({
     host,
     user: username,
     password,
     database
-  })
-  
-  connection.connect()
-  
-  connection.query(`SELECT * FROM ${table}`, (err, rows, fields) => {
-    if (err) throw err
+  });
 
-    // displayRows(rows);
-    dbRows = rows;
-    cb(rows);
-  
-  })
+  connection.connect((err) => {
+    if (err) throw err;
+    console.log('Connected successfully to MySQL');
+
+    const values = data.map((item) => Object.values(item));
+    const query = `INSERT INTO ${table} VALUES ?`;
+
+    connection.query(query, [values], (err, result) => {
+      if (err) throw err;
+
+      console.log(`Inserted ${result.affectedRows} rows into MySQL table`);
+
+      connection.end();
+    });
+  });
 };
 
-const storeMongoData = async ({uri}, data) => {
-  const { MongoClient } = require('mongodb');
-  const client = new MongoClient(uri);
-
-  await client.connect();
-  console.log('Connected successfully to server');
-  const db = client.db();
-  const collection = db.collection('documents');
-  // await collection.insertMany(dbRows);
-  await collection.insertMany(data);
-}
-
-module.exports = {getMySQLData, storeMongoData};
+module.exports = { getMongoData, storeMySQLData };
