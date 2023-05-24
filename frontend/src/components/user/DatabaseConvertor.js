@@ -9,7 +9,7 @@ const DatabaseConvertor = () => {
   const { dbOptions } = app_config;
 
   const [dbOneType, setDbOneType] = useState("sql");
-  const [dbTwoType, setDbTwoType] = useState("nosql");
+  const [dbTwoType, setDbTwoType] = useState("nosql"); 
 
   const [db1ConnStatus, setDb1ConnStatus] = useState(false);
   const [db2ConnStatus, setDb2ConnStatus] = useState(false);
@@ -62,6 +62,7 @@ const DatabaseConvertor = () => {
           <div className="card">
             <div className="card-body">
               <form onSubmit={dbOneForm.handleSubmit}>
+                <input className="form-control mb-3" name="uri" value={dbTwoForm.values.uri} onChange={dbTwoForm.handleChange} placeholder="uri" />
                 <input className="form-control mb-3" name="host" value={dbOneForm.values.host} onChange={dbOneForm.handleChange} placeholder="host" />
                 <input className="form-control mb-3" name="port" value={dbOneForm.values.port} onChange={dbOneForm.handleChange} placeholder="port" />
                 <input className="form-control mb-3" name="username" value={dbOneForm.values.username} onChange={dbOneForm.handleChange} placeholder="username" />
