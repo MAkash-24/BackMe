@@ -63,9 +63,7 @@ const APIGenerator = () => {
     setModels(newModels);
   };
 
-  const generateAPI = () => {
-    console.log(models);
-  };
+  
 
   const dbOperations = [
     "Add",
@@ -77,6 +75,19 @@ const APIGenerator = () => {
   ];
 
   const [selOperations, setSelOperations] = useState([]);
+
+  const generateAPI = async () => {
+    console.log(models);
+    const res = await fetch("http://localhost:5000/api/generate", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ models, routers : selOperations, dbOptions : dbConfig }),
+    })
+
+    console.log(res.status);
+  };
 
   const showOperations = () => {
     return dbOperations.map((op) => (

@@ -134,7 +134,7 @@ const storeMySQLData = (
   });
 };
 
-module.exports = { getMongoData, storeMySQLData };
+module.exports = { getMongoData, storeMySQLData, getMySQLData, storeMongoData };
 
 // getMongoData({
 //   uri: "mongodb+srv://mauryaakash2000:akash@cluster0.6idnxdc.mongodb.net/BackMe?retryWrites=true&w=majority",
