@@ -18,7 +18,6 @@
 //   // console.log('The solution is: ', rows)
 //   displayRows(rows);
 //   dbRows = rows;
-
 // })
 
 // const displayRows = (rowObj) => {
