@@ -21,13 +21,13 @@ const DatabaseConvertor = () => {
 
   const dbOneForm = useFormik({
     initialValues: {
-      uri:"",
+      
       host: "",
       port: "",
       username: "",
       password: "",
       database: "",
-      collectionName: ""
+      table: ""
     },
     onSubmit: (values) => {
       console.log(values);
@@ -36,13 +36,13 @@ const DatabaseConvertor = () => {
 
   const dbTwoForm = useFormik({
     initialValues: {
-      // uri: "",
+      uri: "",
       host: "",
       port: "",
       username: "",
       password: "",
       database: "",
-      table: ""
+      collectionName: ""
     },
     onSubmit: (values) => {
       console.log(values);
@@ -63,13 +63,12 @@ const DatabaseConvertor = () => {
           <div className="card">
             <div className="card-body">
               <form onSubmit={dbOneForm.handleSubmit}>
-                <input className="form-control mb-3" name="uri" value={dbOneForm.values.uri} onChange={dbOneForm.handleChange} placeholder="uri" />
                 <input className="form-control mb-3" name="host" value={dbOneForm.values.host} onChange={dbOneForm.handleChange} placeholder="host" />
                 <input className="form-control mb-3" name="port" value={dbOneForm.values.port} onChange={dbOneForm.handleChange} placeholder="port" />
                 <input className="form-control mb-3" name="username" value={dbOneForm.values.username} onChange={dbOneForm.handleChange} placeholder="username" />
                 <input className="form-control mb-3" name="password" value={dbOneForm.values.password} onChange={dbOneForm.handleChange} placeholder="password" />
                 <input className="form-control mb-3" name="database" value={dbOneForm.values.database} onChange={dbOneForm.handleChange} placeholder="database" />
-                <input className="form-control mb-3" name="collectionName" value={dbOneForm.values.collectionName} onChange={dbOneForm.handleChange} placeholder="table" />
+                <input className="form-control mb-3" name="table" value={dbOneForm.values.table} onChange={dbOneForm.handleChange} placeholder="table" />
                 <button type="submit" className="btn btn-primary">Submit</button>
               </form>
               <div>
@@ -91,12 +90,14 @@ const DatabaseConvertor = () => {
             <div className="card-body">
               <form onSubmit={dbTwoForm.handleSubmit}>
                 {/* <input className="form-control mb-3" name="uri" value={dbTwoForm.values.uri} onChange={dbTwoForm.handleChange} placeholder="uri" /> */}
+                
+                <input className="form-control mb-3" name="uri" value={dbTwoForm.values.uri} onChange={dbTwoForm.handleChange} placeholder="uri" />
                 <input className="form-control mb-3" name="host" value={dbTwoForm.values.host} onChange={dbTwoForm.handleChange} placeholder="host" />
                 <input className="form-control mb-3" name="port" value={dbTwoForm.values.port} onChange={dbTwoForm.handleChange} placeholder="port" />
                 <input className="form-control mb-3" name="username" value={dbTwoForm.values.username} onChange={dbTwoForm.handleChange} placeholder="username" />
                 <input className="form-control mb-3" name="password" value={dbTwoForm.values.password} onChange={dbTwoForm.handleChange} placeholder="password" />
                 <input className="form-control mb-3" name="database" value={dbTwoForm.values.database} onChange={dbTwoForm.handleChange} placeholder="database" />
-                <input className="form-control mb-3" name="table" value={dbTwoForm.values.table} onChange={dbTwoForm.handleChange} placeholder="table" />
+                <input className="form-control mb-3" name="collectionName" value={dbTwoForm.values.collectionName} onChange={dbTwoForm.handleChange} placeholder="collectionName" />
                 <button type="submit" className="btn btn-primary">Submit</button>
                 <p className="h4">Connection Status : {db2ConnStatus ? 'Connected' : 'Not Connected'}</p>
               </form>
@@ -125,12 +126,12 @@ const DatabaseConvertor = () => {
       method: 'POST',
       body: JSON.stringify({
         options: {
-          from: 'NoSQL',
-          to: 'MySQL',
-          type: 'NoSQLtoSQL'
+          from: 'MySQL',
+          to: 'NoSQL',
+          type: 'SQLtoNoSQL'
         },
-        NoSQLDetails: dbOneForm.values,
-        SQLDetails: dbTwoForm.values
+        SQLDetails: dbOneForm.values,
+        NoSQLDetails: dbTwoForm.values
       }),
       headers: {
         'Content-Type' : 'application/json'
