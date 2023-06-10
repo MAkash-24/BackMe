@@ -13,7 +13,7 @@ router.post('/generate', (req, res) => {
     });
 
     res.json({
-        file : 'backend.zip',
+        url : 'http://localhost:5000/backendAPI.zip',
     });
 });
 
