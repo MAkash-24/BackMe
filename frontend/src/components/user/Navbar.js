@@ -46,6 +46,11 @@ const Navbar = () => {
                   Migrate data
                 </NavLink>
               </li>
+              <li className="nav-item">
+                <NavLink className="nav-link" to="/user/apiGenerator">
+                  Generate Backend
+                </NavLink>
+              </li>
               
             </ul>
             {/* Left links */}

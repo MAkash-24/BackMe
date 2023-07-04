@@ -7,7 +7,7 @@ router.post('/generate', (req, res) => {
 
     console.log(req.body);
     const { models, routers, dbOptions } = req.body;
-
+    console.log(routers);
     APIGenerator({models, routers, dbOptions}, (file) => {
         console.log(file);
     });

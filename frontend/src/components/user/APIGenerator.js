@@ -25,6 +25,7 @@ const APIGenerator = () => {
           <label>Model Name</label>
           <input
             value={name}
+            className="form-control"
             onChange={(e) => updateModelData(index, "name", e.target.value)}
           />
         </li>
@@ -32,6 +33,7 @@ const APIGenerator = () => {
           <label>Collection Name</label>
           <input
             value={collectionName}
+            className="form-control"
             onChange={(e) =>
               updateModelData(index, "collectionName", e.target.value)
             }
@@ -101,7 +103,7 @@ const APIGenerator = () => {
     const data = await res.json();
     console.log(data);
     if(data){
-      downloadFile(data.url);   
+      // downloadFile(data.url);   
     }
   };
 
@@ -121,7 +123,7 @@ const APIGenerator = () => {
             }
           }}
         />
-        <label class="form-check-label" for="flexCheckDefault">
+        <label class="form-check-label" htmlFor="flexCheckDefault">
           {op}
         </label>
       </div>
@@ -142,7 +144,7 @@ const APIGenerator = () => {
           </div>
           <div className="card-body">
             {displayModels()}
-            <button onClick={addNewModel}>Add New Model</button>
+            <button onClick={addNewModel} className="btn btn-primary">Add New Model</button>
           </div>
         </div>
         <div className="card">

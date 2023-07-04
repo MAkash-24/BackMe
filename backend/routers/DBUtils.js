@@ -12,6 +12,12 @@ router.post('/transfer', (req, res) => {
             
             storeMongoData(NoSQLDetails, data)
         })
+    }else if(options.type === 'NoSQLtoSQL'){
+        getMongoData(NoSQLDetails, (data) => {
+            console.log(data);
+            
+            storeMySQLData(SQLDetails, data)
+        })
     }
 
 })

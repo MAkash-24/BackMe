@@ -59,20 +59,37 @@ const modelCreater = (models) => {
     })
 };
 
-const routerCreater = (routers) => {
+const routerCreater = (models, operations) => {
 
+
+  checkFolderCreated(`${BASE_PATH}/routers`);
+    models.forEach((model) => {
+        const {name} = model;
+        console.log(apiStructure.getRouterCode(name, operations), 'sdsd');
+        createFile(`${BASE_PATH}/routers/${name}Router.js`, apiStructure.getRouterCode(name, operations));
+    })
 };
 
 const connectionCreator = (dbOptions) => {
+    createFile(`${BASE_PATH}/connection.js`, apiStructure.getConnectionCode(dbOptions));
+};
 
+const packageCreator = () => {
+    createFile(`${BASE_PATH}/package.json`, apiStructure.getPackageCode());
+};
+
+const indexCreator = (routers) => {
+    createFile(`${BASE_PATH}/index.js`, apiStructure.getIndexCode(routers));
 };
 
 const APIGenerator = ({models, routers, dbOptions}, cb) => {
     console.log(BASE_PATH);
     checkFolderCreated(BASE_PATH);
     modelCreater(models);
-    routerCreater(routers);
+    routerCreater(models, routers);
     connectionCreator(dbOptions);
+    packageCreator();
+    indexCreator(routers);
     createZip(BASE_PATH, `backendAPI.zip`);
     cb(`backendAPI.zip`);
 }
