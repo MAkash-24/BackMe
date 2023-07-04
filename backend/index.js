@@ -15,6 +15,8 @@ app.use('/user', userRouter);
 app.use('/dbutil', dbUtilRouter);
 app.use('/api', apiRouter);
 
+app.use(express.static('./archives'))
+
 app.get('/', (req, res) => {
     res.send('Working fine');
 });

@@ -63,6 +63,16 @@ const APIGenerator = () => {
     setModels(newModels);
   };
 
+  function downloadFile(url) {
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', '');
+    link.style.display = 'none';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+
   
 
   const dbOperations = [
@@ -87,6 +97,12 @@ const APIGenerator = () => {
     })
 
     console.log(res.status);
+
+    const data = await res.json();
+    console.log(data);
+    if(data){
+      downloadFile(data.url);   
+    }
   };
 
   const showOperations = () => {
