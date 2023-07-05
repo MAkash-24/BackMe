@@ -67,7 +67,7 @@ const UserProfile = () => {
                     mb={4}
                     align="center"
                   >
-                    Bay Area, San Francisco, CA
+                    Lucknow, Uttar Pradesh.
                   </Typography>
                   <div
                     style={{
@@ -96,7 +96,7 @@ const UserProfile = () => {
                       <ListItemIcon>
                         <i className="fas fa-globe fa-lg text-warning" />
                       </ListItemIcon>
-                      <ListItemText primary="https://mdbootstrap.com" />
+                      <ListItemText primary="https://digvijay-singh.netlify.app/" />
                     </ListItem>
                     <ListItem>
                       <ListItemIcon>
@@ -105,7 +105,7 @@ const UserProfile = () => {
                           style={{ color: "#333333" }}
                         />
                       </ListItemIcon>
-                      <ListItemText primary="mdbootstrap" />
+                      <ListItemText primary="https://github.com//valiantguardian" />
                     </ListItem>
                     <ListItem>
                       <ListItemIcon>
@@ -114,7 +114,7 @@ const UserProfile = () => {
                           style={{ color: "#55acee" }}
                         />
                       </ListItemIcon>
-                      <ListItemText primary="@mdbootstrap" />
+                      <ListItemText primary="@singhdigvijay74" />
                     </ListItem>
                     <ListItem>
                       <ListItemIcon>
@@ -123,7 +123,7 @@ const UserProfile = () => {
                           style={{ color: "#ac2bac" }}
                         />
                       </ListItemIcon>
-                      <ListItemText primary="mdbootstrap" />
+                      <ListItemText primary="-.digvijay.-.singh.-" />
                     </ListItem>
                     <ListItem>
                       <ListItemIcon>
@@ -132,7 +132,7 @@ const UserProfile = () => {
                           style={{ color: "#3b5998" }}
                         />
                       </ListItemIcon>
-                      <ListItemText primary="mdbootstrap" />
+                      <ListItemText primary="Digvijay Singh" />
                     </ListItem>
                   </ul>
                 </CardContent>
@@ -188,7 +188,7 @@ const UserProfile = () => {
                     </div>
                     <div className="col-sm-9">
                       <Typography variant="body2" color="textSecondary" mb={0}>
-                        (098) 765-4321
+                        (+91) 987-6543-210
                       </Typography>
                     </div>
                   </div>
@@ -201,7 +201,7 @@ const UserProfile = () => {
                     </div>
                     <div className="col-sm-9">
                       <Typography variant="body2" color="textSecondary" mb={0}>
-                        Bay Area, San Francisco, CA
+                        Lucknow, Uttar Pradesh
                       </Typography>
                     </div>
                   </div>
