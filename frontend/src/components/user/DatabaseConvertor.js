@@ -1,6 +1,20 @@
 import React, { useEffect, useState } from "react";
-import app_config from "../../config";
 import { useFormik } from "formik";
+import {
+  Box,
+  Button,
+  Container,
+  FormControl,
+  FormControlLabel,
+  FormLabel,
+  MenuItem,
+  Radio,
+  RadioGroup,
+  Select,
+  TextField,
+  Typography,
+} from "@mui/material";
+import app_config from "../../config";
 
 const DatabaseConvertor = () => {
   const [dbFirst, setDbFirst] = useState(null);
@@ -9,7 +23,7 @@ const DatabaseConvertor = () => {
   const { dbOptions } = app_config;
 
   const [dbOneType, setDbOneType] = useState("sql");
-  const [dbTwoType, setDbTwoType] = useState("nosql"); 
+  const [dbTwoType, setDbTwoType] = useState("nosql");
 
   const [db1ConnStatus, setDb1ConnStatus] = useState(false);
   const [db2ConnStatus, setDb2ConnStatus] = useState(false);
@@ -21,17 +35,16 @@ const DatabaseConvertor = () => {
 
   const dbOneForm = useFormik({
     initialValues: {
-      
       host: "",
       port: "",
       username: "",
       password: "",
       database: "",
-      table: ""
+      table: "",
     },
     onSubmit: (values) => {
       console.log(values);
-    }
+    },
   });
 
   const dbTwoForm = useFormik({
@@ -42,40 +55,85 @@ const DatabaseConvertor = () => {
       username: "",
       password: "",
       database: "",
-      collectionName: ""
+      collectionName: "",
     },
     onSubmit: (values) => {
       console.log(values);
-    }
+    },
   });
-
 
   useEffect(() => {
     initDbs();
-  }, [])
-
+  }, []);
 
   const DatabaseConfigOne = () => {
     if (dbFirst !== null) {
       return (
         <div>
-          <h3>Selected Database : {dbFirst.name}</h3>
-          <div className="card">
-            <div className="card-body">
-              <form onSubmit={dbOneForm.handleSubmit}>
-                <input className="form-control mb-3" name="host" value={dbOneForm.values.host} onChange={dbOneForm.handleChange} placeholder="host" />
-                <input className="form-control mb-3" name="port" value={dbOneForm.values.port} onChange={dbOneForm.handleChange} placeholder="port" />
-                <input className="form-control mb-3" name="username" value={dbOneForm.values.username} onChange={dbOneForm.handleChange} placeholder="username" />
-                <input className="form-control mb-3" name="password" value={dbOneForm.values.password} onChange={dbOneForm.handleChange} placeholder="password" />
-                <input className="form-control mb-3" name="database" value={dbOneForm.values.database} onChange={dbOneForm.handleChange} placeholder="database" />
-                <input className="form-control mb-3" name="table" value={dbOneForm.values.table} onChange={dbOneForm.handleChange} placeholder="table" />
-                <button type="submit" className="btn btn-primary">Submit</button>
-              </form>
-              <div>
-                <p className="h4">Connection Status : {db1ConnStatus ? 'Connected' : 'Not Connected'}</p>
-              </div>
-            </div>
-          </div>
+          <Typography variant="h5">
+            Selected Database: {dbFirst.name}
+          </Typography>
+          <FormControl component="div">
+            <form onSubmit={dbOneForm.handleSubmit}>
+              <TextField
+                name="host"
+                value={dbOneForm.values.host}
+                onChange={dbOneForm.handleChange}
+                label="Host"
+                fullWidth
+                margin="normal"
+              />
+              <TextField
+                name="port"
+                value={dbOneForm.values.port}
+                onChange={dbOneForm.handleChange}
+                label="Port"
+                fullWidth
+                margin="normal"
+              />
+              <TextField
+                name="username"
+                value={dbOneForm.values.username}
+                onChange={dbOneForm.handleChange}
+                label="Username"
+                fullWidth
+                margin="normal"
+              />
+              <TextField
+                name="password"
+                value={dbOneForm.values.password}
+                onChange={dbOneForm.handleChange}
+                label="Password"
+                fullWidth
+                margin="normal"
+              />
+              <TextField
+                name="database"
+                value={dbOneForm.values.database}
+                onChange={dbOneForm.handleChange}
+                label="Database"
+                fullWidth
+                margin="normal"
+              />
+              <TextField
+                name="table"
+                value={dbOneForm.values.table}
+                onChange={dbOneForm.handleChange}
+                label="Table"
+                fullWidth
+                margin="normal"
+              />
+              <Button type="submit" variant="contained" color="primary">
+                Submit
+              </Button>
+            </form>
+            <Box mt={2}>
+              <Typography variant="h5">
+                Connection Status:{" "}
+                {db1ConnStatus ? "Connected" : "Not Connected"}
+              </Typography>
+            </Box>
+          </FormControl>
         </div>
       );
     }
@@ -85,24 +143,78 @@ const DatabaseConvertor = () => {
     if (dbSecond !== null) {
       return (
         <div>
-          <h3>Selected Database : {dbSecond.name}</h3>
-          <div className="card">
-            <div className="card-body">
-              <form onSubmit={dbTwoForm.handleSubmit}>
-                {/* <input className="form-control mb-3" name="uri" value={dbTwoForm.values.uri} onChange={dbTwoForm.handleChange} placeholder="uri" /> */}
-                
-                <input className="form-control mb-3" name="uri" value={dbTwoForm.values.uri} onChange={dbTwoForm.handleChange} placeholder="uri" />
-                <input className="form-control mb-3" name="host" value={dbTwoForm.values.host} onChange={dbTwoForm.handleChange} placeholder="host" />
-                <input className="form-control mb-3" name="port" value={dbTwoForm.values.port} onChange={dbTwoForm.handleChange} placeholder="port" />
-                <input className="form-control mb-3" name="username" value={dbTwoForm.values.username} onChange={dbTwoForm.handleChange} placeholder="username" />
-                <input className="form-control mb-3" name="password" value={dbTwoForm.values.password} onChange={dbTwoForm.handleChange} placeholder="password" />
-                <input className="form-control mb-3" name="database" value={dbTwoForm.values.database} onChange={dbTwoForm.handleChange} placeholder="database" />
-                <input className="form-control mb-3" name="collectionName" value={dbTwoForm.values.collectionName} onChange={dbTwoForm.handleChange} placeholder="collectionName" />
-                <button type="submit" className="btn btn-primary">Submit</button>
-                <p className="h4">Connection Status : {db2ConnStatus ? 'Connected' : 'Not Connected'}</p>
-              </form>
-            </div>
-          </div>
+          <Typography variant="h5">
+            Selected Database: {dbSecond.name}
+          </Typography>
+          <FormControl component="div">
+            <form onSubmit={dbTwoForm.handleSubmit}>
+              <TextField
+                name="uri"
+                value={dbTwoForm.values.uri}
+                onChange={dbTwoForm.handleChange}
+                label="URI"
+                fullWidth
+                margin="normal"
+              />
+              <TextField
+                name="host"
+                value={dbTwoForm.values.host}
+                onChange={dbTwoForm.handleChange}
+                label="Host"
+                fullWidth
+                margin="normal"
+              />
+              <TextField
+                name="port"
+                value={dbTwoForm.values.port}
+                onChange={dbTwoForm.handleChange}
+                label="Port"
+                fullWidth
+                margin="normal"
+              />
+              <TextField
+                name="username"
+                value={dbTwoForm.values.username}
+                onChange={dbTwoForm.handleChange}
+                label="Username"
+                fullWidth
+                margin="normal"
+              />
+              <TextField
+                name="password"
+                value={dbTwoForm.values.password}
+                onChange={dbTwoForm.handleChange}
+                label="Password"
+                fullWidth
+                margin="normal"
+              />
+              <TextField
+                name="database"
+                value={dbTwoForm.values.database}
+                onChange={dbTwoForm.handleChange}
+                label="Database"
+                fullWidth
+                margin="normal"
+              />
+              <TextField
+                name="collectionName"
+                value={dbTwoForm.values.collectionName}
+                onChange={dbTwoForm.handleChange}
+                label="Collection Name"
+                fullWidth
+                margin="normal"
+              />
+              <Button type="submit" variant="contained" color="primary">
+                Submit
+              </Button>
+            </form>
+            <Box mt={2}>
+              <Typography variant="h5">
+                Connection Status:{" "}
+                {db2ConnStatus ? "Connected" : "Not Connected"}
+              </Typography>
+            </Box>
+          </FormControl>
         </div>
       );
     }
@@ -120,119 +232,118 @@ const DatabaseConvertor = () => {
     setDbSecond(db);
   };
 
-  const startConvertion = async () => {
+  const startConversion = async () => {
     console.log(dbTwoForm.values);
-    const res = await fetch('http://localhost:5000/dbutil/transfer', {
-      method: 'POST',
+    const res = await fetch("http://localhost:5000/dbutil/transfer", {
+      method: "POST",
       body: JSON.stringify({
         options: {
-          from: 'MySQL',
-          to: 'NoSQL',
-          type: 'SQLtoNoSQL'
+          from: "MySQL",
+          to: "NoSQL",
+          type: "SQLtoNoSQL",
         },
         SQLDetails: dbOneForm.values,
-        NoSQLDetails: dbTwoForm.values
+        NoSQLDetails: dbTwoForm.values,
       }),
       headers: {
-        'Content-Type' : 'application/json'
-      }
-    })
+        "Content-Type": "application/json",
+      },
+    });
     console.log(res.status);
-  }
+  };
 
   return (
-    <div>
+    <Container>
       <section className="container-fluid my-5 p-5">
         <div className="row">
           <div className="col-md-6">
-            <h2>Select First Database</h2>
-            <div className="form-check form-check-inline">
-              <input
-                className="form-check-input"
-                type="radio"
-                name="dbtype"
-                id="sql"
-                checked={dbOneType === "sql"}
-                onChange={(e) => setDbOneType("sql")}
-              />
-              <label className="form-check-label" htmlFor="sql">
-                SQL
-              </label>
-            </div>
-            <div className="form-check form-check-inline">
-              <input
-                className="form-check-input"
-                type="radio"
-                name="dbtype"
-                id="nosql"
-                checked={dbOneType === "nosql"}
-                onChange={(e) => setDbOneType("nosql")}
-              />
-              <label className="form-check-label" htmlFor="nosql">
-                NoSQL
-              </label>
-            </div>
+            <Typography variant="h4">Select First Database</Typography>
+            <Box mt={1}>
+              <FormControl component="fieldset" sx={{ my: 2 }}>
+                <FormLabel component="legend">Database Type</FormLabel>
+                <RadioGroup
+                  row
+                  name="dbtype"
+                  value={dbOneType}
+                  onChange={(e) => setDbOneType(e.target.value)}
+                >
+                  <FormControlLabel
+                    value="sql"
+                    control={<Radio />}
+                    label="SQL"
+                  />
+                  <FormControlLabel
+                    value="nosql"
+                    control={<Radio />}
+                    label="NoSQL"
+                  />
+                </RadioGroup>
+              </FormControl>
+            </Box>
 
-            <hr />
-            <select className="form-control" onChange={selectDatabaseOne}>
-              {dbOptions[dbOneType].map(({ name }, index) => (
-                <option key={index} value={index}>
-                  {name}
-                </option>
-              ))}
-            </select>
-            <hr />
+            <FormControl sx={{ my: 2 }}>
+              <Select
+                value={dbFirst ? dbFirst.name : ""}
+                onChange={selectDatabaseOne}
+                sx={{ width: "200px" }}
+              >
+                {dbOptions[dbOneType].map(({ name }, index) => (
+                  <MenuItem key={index} value={index}>
+                    {name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
 
-            {
-              DatabaseConfigOne()
-            }
+            {dbFirst && <DatabaseConfigOne />}
           </div>
           <div className="col-md-6">
-            <h2>Select Second Database</h2>
-            <div className="form-check form-check-inline">
-              <input
-                className="form-check-input"
-                type="radio"
-                name="dbtype2"
-                id="sql2"
-                checked={dbTwoType === "sql"}
-                onChange={(e) => setDbTwoType("sql")}
-              />
-              <label className="form-check-label" htmlFor="sql">
-                SQL
-              </label>
-            </div>
-            <div className="form-check form-check-inline">
-              <input
-                className="form-check-input"
-                type="radio"
-                name="dbtype2"
-                id="nosql2"
-                checked={dbTwoType === "nosql"}
-                onChange={(e) => setDbTwoType("nosql")}
-              />
-              <label className="form-check-label" htmlFor="nosql">
-                NoSQL
-              </label>
-            </div>
+            <Typography variant="h4">Select Second Database</Typography>
+            <Box mt={1}>
+              <FormControl component="fieldset" sx={{ my: 2 }}>
+                <FormLabel component="legend">Database Type</FormLabel>
+                <RadioGroup
+                  row
+                  name="dbtype2"
+                  value={dbTwoType}
+                  onChange={(e) => setDbTwoType(e.target.value)}
+                >
+                  <FormControlLabel
+                    value="sql"
+                    control={<Radio />}
+                    label="SQL"
+                  />
+                  <FormControlLabel
+                    value="nosql"
+                    control={<Radio />}
+                    label="NoSQL"
+                  />
+                </RadioGroup>
+              </FormControl>
+            </Box>
 
-            <hr />
-            <select className="form-control" onChange={selectDatabaseTwo}>
-              {dbOptions[dbTwoType].map((db, index) => (
-                <option key={index} value={index}>
-                  {db.name}
-                </option>
-              ))}
-            </select>
+            <FormControl sx={{ my: 2 }}>
+              <Select
+                value={dbSecond ? dbSecond.name : ""}
+                onChange={selectDatabaseTwo}
+                sx={{ width: "200px" }}
+              >
+                {dbOptions[dbTwoType].map((db, index) => (
+                  <MenuItem key={index} value={index}>
+                    {db.name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
 
-            <hr />
-            {DatabaseConfigTwo()}
+            {dbSecond && <DatabaseConfigTwo />}
           </div>
         </div>
-
-        <button className="btn btn-primary" onClick={startConvertion}>Convert</button>
+        <Button variant="contained" color="primary" onClick={startConversion}>
+          Convert
+        </Button>
       </section>
-    </div>
+    </Container>
   );
 };
 
