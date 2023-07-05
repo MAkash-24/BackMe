@@ -27,7 +27,12 @@ const Navbar = () => {
             </li>
             <li className="nav-item">
               <NavLink className="nav-link" to="/user/databaseConverter">
-                Migrate data
+                Migrate Data
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/user/apiGenerator">
+                Generate Api
               </NavLink>
             </li>
           </ul>

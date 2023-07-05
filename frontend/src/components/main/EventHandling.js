@@ -1,50 +1,80 @@
 import React, { useState } from "react";
+import { Box, Button, TextField } from "@mui/material";
 
 const EventHandling = () => {
-
-  // let count = 0;
-
   const [count, setCount] = useState(0);
-
-  const [theme, setTheme] = useState({ backgroundColor: 'white', color: 'black' });
+  const [theme, setTheme] = useState({
+    backgroundColor: "white",
+    color: "black",
+  });
 
   const addCount = () => {
-    // count++; ❌
-    setCount(count + 1); // ✅
-    console.log(count);
-  }
+    setCount((prevCount) => prevCount + 1);
+  };
 
   const enableDarkMode = () => {
-      setTheme({ backgroundColor: 'black', color: 'white' })
+    setTheme({ backgroundColor: "black", color: "white" });
   };
 
   const enableLightMode = () => {
-    setTheme({ backgroundColor: 'white', color: 'black' })
+    setTheme({ backgroundColor: "white", color: "black" });
+  };
+
+  const handleInputChange = (e) => {
+    console.log(e.target.value);
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.code === "Space") {
+      console.log("Space key was pressed");
+    }
   };
 
   return (
     <div style={theme} className="vh-100">
-    <div className="container" >
+      <Box className="container">
+        <Box my={3}>
+          <Button
+            variant="contained"
+            sx={{ background: "#f6f6f6", color: "#000" }}
+            onClick={enableDarkMode}
+          >
+            Dark Mode
+          </Button>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={enableLightMode}
+            sx={{ marginLeft: "10px" }}
+          >
+            Light Mode
+          </Button>
+        </Box>
+        <h1>Event Handling</h1>
+        <hr />
 
-      <button className="btn btn-dark" onClick={enableDarkMode}>Dark Mode</button>
-      <button className="btn btn-primary" onClick={enableLightMode}>Light Mode</button>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={() => {
+            alert("Button was clicked");
+          }}
+        >
+          Click Event Handling
+        </Button>
 
-      <h1>Event Handling</h1>
-      <hr />
+        <TextField
+          className="form-control mt-4"
+          onChange={handleInputChange}
+          onKeyDown={handleKeyDown}
+        />
 
-      <button className="btn btn-primary" onClick={ () => { alert('button was clicked') } } >Click Event Handling</button>
+        <Button variant="contained" color="primary" onClick={addCount}>
+          <i className="fas fa-thumbs-up"></i>
+        </Button>
 
-      <input type="text" className="form-control mt-4" onChange={ (e) => { console.log(e.target.value) } }
-        onKeyDown={(e) => { if(e.code === 'Space') console.log('space key was pressed') }}
-      />
-
-      <button className="btn btn-primary mt-5" onClick={ addCount }>
-        <i class="fas fa-thumbs-up"></i>
-      </button>
-    
-      <h1>{count}</h1>
-      
-    </div>
+        <h1>{count}</h1>
+      </Box>
     </div>
   );
 };
