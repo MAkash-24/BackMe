@@ -1,11 +1,13 @@
-const { getMySQLData, storeMongoData } = require('../DBConvertor');
+const { getMySQLData, storeMongoData, getMongoData, storeMySQLData } = require('../DBConvertor');
 
 const router = require('express').Router();
 
 router.post('/transfer', (req, res) => {
     const { options, SQLDetails, NoSQLDetails } = req.body;
     
-    // console.log(req.body);
+    console.log(options);
+    // res.send('done');
+    // return;
     if(options.type === 'SQLtoNoSQL'){
         getMySQLData(SQLDetails, (data) => {
             console.log(data);

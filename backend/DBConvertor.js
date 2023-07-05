@@ -77,7 +77,7 @@ const getMySQLData = ({host, username, password, database, table}, cb) => {
   })
 };
 
-const storeMongoData = async ({uri}, data) => {
+const storeMongoData = async ({uri, collectionName}, data) => {
   console.log('storing mongo data...');
   const { MongoClient } = require('mongodb');
   const client = new MongoClient(uri);
@@ -85,7 +85,7 @@ const storeMongoData = async ({uri}, data) => {
   await client.connect();
   console.log('Connected successfully to server');
   const db = client.db();
-  const collection = db.collection('documents');
+  const collection = db.collection(collectionName);
   // await collection.insertMany(dbRows);
   await collection.insertMany(data);
   console.log('mongodata stored');
@@ -99,11 +99,12 @@ const getMongoData = async ({ uri, collectionName }, cb) => {
   console.log('Connected successfully to server');
   const db = client.db();
   const collection = db.collection(collectionName);
-
+  // console.log(collection);
   collection.find({}).toArray((err, data) => {
     if (err) throw err;
-    client.close();
+    console.log(data);
     cb(data);
+    client.close();
   });
 };
 

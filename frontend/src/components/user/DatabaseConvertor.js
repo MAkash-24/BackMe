@@ -54,6 +54,38 @@ const DatabaseConvertor = () => {
     initDbs();
   }, [])
 
+  const sqlForm = () => {
+    return(
+      <form onSubmit={dbOneForm.handleSubmit}>
+      <input className="form-control mb-3" name="host" value={dbOneForm.values.host} onChange={dbOneForm.handleChange} placeholder="host" />
+      <input className="form-control mb-3" name="port" value={dbOneForm.values.port} onChange={dbOneForm.handleChange} placeholder="port" />
+      <input className="form-control mb-3" name="username" value={dbOneForm.values.username} onChange={dbOneForm.handleChange} placeholder="username" />
+      <input className="form-control mb-3" name="password" value={dbOneForm.values.password} onChange={dbOneForm.handleChange} placeholder="password" />
+      <input className="form-control mb-3" name="database" value={dbOneForm.values.database} onChange={dbOneForm.handleChange} placeholder="database" />
+      <input className="form-control mb-3" name="table" value={dbOneForm.values.table} onChange={dbOneForm.handleChange} placeholder="table" />
+      <button type="submit" className="btn btn-primary">Submit</button>
+    </form>
+    )
+  }
+
+  const nosqlForm = () => {
+      return (
+        <form onSubmit={dbTwoForm.handleSubmit}>
+                {/* <input className="form-control mb-3" name="uri" value={dbTwoForm.values.uri} onChange={dbTwoForm.handleChange} placeholder="uri" /> */}
+                
+                <input className="form-control mb-3" name="uri" value={dbTwoForm.values.uri} onChange={dbTwoForm.handleChange} placeholder="uri" />
+                <input className="form-control mb-3" name="host" value={dbTwoForm.values.host} onChange={dbTwoForm.handleChange} placeholder="host" />
+                <input className="form-control mb-3" name="port" value={dbTwoForm.values.port} onChange={dbTwoForm.handleChange} placeholder="port" />
+                <input className="form-control mb-3" name="username" value={dbTwoForm.values.username} onChange={dbTwoForm.handleChange} placeholder="username" />
+                <input className="form-control mb-3" name="password" value={dbTwoForm.values.password} onChange={dbTwoForm.handleChange} placeholder="password" />
+                <input className="form-control mb-3" name="database" value={dbTwoForm.values.database} onChange={dbTwoForm.handleChange} placeholder="database" />
+                <input className="form-control mb-3" name="collectionName" value={dbTwoForm.values.collectionName} onChange={dbTwoForm.handleChange} placeholder="collectionName" />
+                <button type="submit" className="btn btn-primary">Submit</button>
+                <p className="h4">Connection Status : {db2ConnStatus ? 'Connected' : 'Not Connected'}</p>
+              </form>
+      )
+  }
+
 
   const DatabaseConfigOne = () => {
     if (dbFirst !== null) {
@@ -62,15 +94,9 @@ const DatabaseConvertor = () => {
           <h3>Selected Database : {dbFirst.name}</h3>
           <div className="card">
             <div className="card-body">
-              <form onSubmit={dbOneForm.handleSubmit}>
-                <input className="form-control mb-3" name="host" value={dbOneForm.values.host} onChange={dbOneForm.handleChange} placeholder="host" />
-                <input className="form-control mb-3" name="port" value={dbOneForm.values.port} onChange={dbOneForm.handleChange} placeholder="port" />
-                <input className="form-control mb-3" name="username" value={dbOneForm.values.username} onChange={dbOneForm.handleChange} placeholder="username" />
-                <input className="form-control mb-3" name="password" value={dbOneForm.values.password} onChange={dbOneForm.handleChange} placeholder="password" />
-                <input className="form-control mb-3" name="database" value={dbOneForm.values.database} onChange={dbOneForm.handleChange} placeholder="database" />
-                <input className="form-control mb-3" name="table" value={dbOneForm.values.table} onChange={dbOneForm.handleChange} placeholder="table" />
-                <button type="submit" className="btn btn-primary">Submit</button>
-              </form>
+              {
+                dbOneType === 'sql' ? sqlForm() : nosqlForm()
+              }
               <div>
                 <p className="h4">Connection Status : {db1ConnStatus ? 'Connected' : 'Not Connected'}</p>
               </div>
@@ -88,19 +114,9 @@ const DatabaseConvertor = () => {
           <h3>Selected Database : {dbSecond.name}</h3>
           <div className="card">
             <div className="card-body">
-              <form onSubmit={dbTwoForm.handleSubmit}>
-                {/* <input className="form-control mb-3" name="uri" value={dbTwoForm.values.uri} onChange={dbTwoForm.handleChange} placeholder="uri" /> */}
-                
-                <input className="form-control mb-3" name="uri" value={dbTwoForm.values.uri} onChange={dbTwoForm.handleChange} placeholder="uri" />
-                <input className="form-control mb-3" name="host" value={dbTwoForm.values.host} onChange={dbTwoForm.handleChange} placeholder="host" />
-                <input className="form-control mb-3" name="port" value={dbTwoForm.values.port} onChange={dbTwoForm.handleChange} placeholder="port" />
-                <input className="form-control mb-3" name="username" value={dbTwoForm.values.username} onChange={dbTwoForm.handleChange} placeholder="username" />
-                <input className="form-control mb-3" name="password" value={dbTwoForm.values.password} onChange={dbTwoForm.handleChange} placeholder="password" />
-                <input className="form-control mb-3" name="database" value={dbTwoForm.values.database} onChange={dbTwoForm.handleChange} placeholder="database" />
-                <input className="form-control mb-3" name="collectionName" value={dbTwoForm.values.collectionName} onChange={dbTwoForm.handleChange} placeholder="collectionName" />
-                <button type="submit" className="btn btn-primary">Submit</button>
-                <p className="h4">Connection Status : {db2ConnStatus ? 'Connected' : 'Not Connected'}</p>
-              </form>
+              {
+                dbTwoType === 'sql' ? sqlForm() : nosqlForm()
+              }
             </div>
           </div>
         </div>
@@ -120,15 +136,23 @@ const DatabaseConvertor = () => {
     setDbSecond(db);
   };
 
+  const getConversionType = () => {
+    if(dbOneType === 'sql' && dbTwoType === 'nosql'){
+      return 'SQLtoNoSQL';
+    }else if(dbOneType === 'nosql' && dbTwoType === 'sql'){
+      return 'NoSQLtoSQL';
+    }
+  }
+
   const startConvertion = async () => {
     console.log(dbTwoForm.values);
     const res = await fetch('http://localhost:5000/dbutil/transfer', {
       method: 'POST',
       body: JSON.stringify({
         options: {
-          from: 'MySQL',
-          to: 'NoSQL',
-          type: 'SQLtoNoSQL'
+          // from: 'SQL',
+          // to: 'NoSQL',
+          type: getConversionType()
         },
         SQLDetails: dbOneForm.values,
         NoSQLDetails: dbTwoForm.values
