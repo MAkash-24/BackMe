@@ -1,5 +1,6 @@
 import React from "react";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import Avatar from '@mui/material/Avatar';
 
 const Navbar = () => {
 
@@ -26,18 +27,12 @@ const Navbar = () => {
           {/* Collapsible wrapper */}
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             {/* Navbar brand */}
-            <a className="navbar-brand mt-2 mt-lg-0" href="#">
-            <img
-                src="https://www.shutterstock.com/image-vector/database-vector-icon-isolated-on-260nw-1194003391.jpg"
-                height={50}
-                alt="MDB Logo"
+            <NavLink className="navbar-brand mt-2 mt-lg-0" to="/">
+            <Avatar
+                src="images/database-svg.svg"
                 loading="lazy"
-              />              
-              
-
-
-              
-            </a>
+              />
+            </NavLink>
             {/* Left links */}
             <ul className="navbar-nav ms-auto mb-2 mb-lg-0" >
               <li className="nav-item">

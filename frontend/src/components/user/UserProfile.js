@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { NavLink } from "react-router-dom";
 
 const UserProfile = () => {
 
@@ -16,10 +17,10 @@ const UserProfile = () => {
               >
                 <ol className="breadcrumb mb-0">
                   <li className="breadcrumb-item">
-                    <a href="#">Home</a>
+                    <NavLink to="/home">Home</NavLink>
                   </li>
                   <li className="breadcrumb-item">
-                    <a href="#">User</a>
+                    <NavLink to="/profile">User</NavLink>
                   </li>
                   <li className="breadcrumb-item active" aria-current="page">
                     User Profile

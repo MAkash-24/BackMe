@@ -1,9 +1,7 @@
-import logo from "./logo.svg";
 import "./App.css";
 import Home from "./components/main/Home";
 import Login from "./components/main/Login";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import Navbar from "./components/main/Navbar";
 import Signup from "./components/main/Signup";
 import EventHandling from "./components/main/EventHandling";
 import ManageUsers from "./components/main/ManageUsers";

@@ -14,9 +14,6 @@ const APIGenerator = () => {
     },
   ]);
 
-  const [dbConfig, setDbConfig] = useState({
-    uri: "",
-  });
 
   const displayModels = () => {
     return models.map(({ name, collectionName, fields }, index) => (
@@ -93,7 +90,7 @@ const APIGenerator = () => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ models, routers : selOperations, dbOptions : dbConfig }),
+      body: JSON.stringify({ models, routers : selOperations }),
     })
 
     console.log(res.status);

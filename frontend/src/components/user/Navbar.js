@@ -1,9 +1,8 @@
+import { Avatar } from "@mui/material";
 import React from "react";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
-
-  
 
   return (
     <>
@@ -26,14 +25,12 @@ const Navbar = () => {
           {/* Collapsible wrapper */}
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             {/* Navbar brand */}
-            <a className="navbar-brand mt-2 mt-lg-0" href="#">
-              <img
-                src="https://mdbcdn.b-cdn.net/img/logo/mdb-transaprent-noshadows.webp"
-                height={15}
-                alt="MDB Logo"
+            <NavLink className="navbar-brand mt-2 mt-lg-0" to="/">
+              <Avatar
+                src="images/database-svg.svg"
                 loading="lazy"
               />
-            </a>
+            </NavLink>
             {/* Left links */}
             <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
               <li className="nav-item">
