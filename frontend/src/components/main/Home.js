@@ -1,8 +1,17 @@
 import React from "react";
-import { Button, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import "./style.css";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+  const navigate = useNavigate();
+
+  const handleGetStarted = () => {
+    navigate('/main/login');
+  };
+  const handleContact = () => {
+    navigate('/user/feedback');
+  };
   return (
     <div>
       <div className="homeBack">
@@ -16,14 +25,15 @@ const Home = () => {
               The developer data platform that provides the services and tools
               necessary to migrate your data from different databases.
             </Typography>
-
-            <Button variant="contained" color="primary">
+            <Box mt={5} sx={{display:"flex", justifyContent:"flex-start", alignItems:"center"}}>
+            <Button variant="contained" color="primary" onClick={handleGetStarted}>
               Get Started
             </Button>
-            <Button variant="outlined" sx={{marginLeft:"10px"}}>Contact Us</Button>
-            <i style={{ fontSize: 20 }} className="fas">
+            <Button variant="outlined" sx={{marginLeft:"10px"}} onClick={handleContact}>Contact Us</Button>
+            <i style={{ fontSize: 20, marginLeft:"10px" }} className="fas">
               &#xf061;
             </i>
+            </Box>
           </div>
 
           <div className="col-sm-5" id="image">

@@ -1,11 +1,12 @@
-import React from 'react';
+import React from "react";
 import {
   Container,
   Typography,
   Grid,
   TextField,
-  Button
-} from '@material-ui/core';
+  Button,
+  Box,
+} from "@mui/material";
 
 const Feedback = () => {
   const handleSubmit = (e) => {
@@ -17,14 +18,15 @@ const Feedback = () => {
   };
 
   return (
-    <Container maxWidth="md" className='container'>
+    <Container maxWidth="md" className="container">
       <section className="mb-4 my-5 card shadow p-5">
         <Typography variant="h2" component="h2" align="center" gutterBottom>
           Contact us
         </Typography>
         <Typography variant="body1" align="center" paragraph>
-          Do you have any questions? Please do not hesitate to contact us directly.
-          Our team will come back to you within a matter of hours to help you.
+          Do you have any questions? Please do not hesitate to contact us
+          directly. Our team will come back to you within a matter of hours to
+          help you.
         </Typography>
         <Grid container spacing={2}>
           <Grid item xs={12} md={9}>
@@ -49,25 +51,31 @@ const Feedback = () => {
                   />
                 </Grid>
               </Grid>
-              <TextField
-                type="text"
-                id="subject"
-                name="subject"
-                label="Subject"
-                fullWidth
-              />
-              <TextField
-                type="text"
-                id="message"
-                name="message"
-                label="Your message"
-                multiline
-                rows={2}
-                fullWidth
-              />
-              <Button type="submit" variant="contained" color="primary">
-                Send
-              </Button>
+              <Box mt={1}>
+                <TextField
+                  type="text"
+                  id="subject"
+                  name="subject"
+                  label="Subject"
+                  fullWidth
+                />
+              </Box>
+              <Box mt={1}>
+                <TextField
+                  type="text"
+                  id="message"
+                  name="message"
+                  label="Your message"
+                  multiline
+                  rows={2}
+                  fullWidth
+                />
+              </Box>
+              <Box mt={1}>
+                <Button type="submit" variant="contained" color="primary">
+                  Send
+                </Button>
+              </Box>
             </form>
             <div className="status" />
           </Grid>
@@ -75,15 +83,15 @@ const Feedback = () => {
             <ul className="list-unstyled mb-0">
               <li>
                 <i className="fas fa-map-marker-alt fa-2x" />
-                <Typography variant="body1">Lucknow, UTTAR PRADESH</Typography>
+                <Typography variant="body1">Lucknow, Uttar Pradesh</Typography>
               </li>
               <li>
                 <i className="fas fa-phone mt-4 fa-2x" />
-                <Typography variant="body1">+91123456789</Typography>
+                <Typography variant="body1">+919876543210</Typography>
               </li>
               <li>
                 <i className="fas fa-envelope mt-4 fa-2x" />
-                <Typography variant="body1">mauryaakash2000@gmail.com</Typography>
+                <Typography variant="body1">admin@backme.com</Typography>
               </li>
             </ul>
           </Grid>
