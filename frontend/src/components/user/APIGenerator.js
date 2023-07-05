@@ -1,4 +1,19 @@
 import React, { useState } from "react";
+import {
+  Button,
+  Card,
+  CardHeader,
+  CardContent,
+  Checkbox,
+  Container,
+  FormControlLabel,
+  Input,
+  List,
+  ListItem,
+  ListItemText,
+  TextField,
+  Typography,
+} from "@mui/material";
 
 const APIGenerator = () => {
   const [models, setModels] = useState([
@@ -14,32 +29,28 @@ const APIGenerator = () => {
     },
   ]);
 
-  const [dbConfig, setDbConfig] = useState({
-    uri: "",
-  });
-
   const displayModels = () => {
-    return models.map(({ name, collectionName, fields }, index) => (
-      <ul className="list-group">
-        <li className="list-group-item">
-          <label>Model Name</label>
-          <input
+    return models.map(({ name, collectionName }, index) => (
+      <List key={index} sx={{ mb: 2 }}>
+        <ListItem>
+          <ListItemText primary="Model Name" />
+          <TextField
             value={name}
             className="form-control"
             onChange={(e) => updateModelData(index, "name", e.target.value)}
           />
-        </li>
-        <li className="list-group-item">
-          <label>Collection Name</label>
-          <input
+        </ListItem>
+        <ListItem>
+          <ListItemText primary="Collection Name" />
+          <TextField
             value={collectionName}
             className="form-control"
             onChange={(e) =>
               updateModelData(index, "collectionName", e.target.value)
             }
           />
-        </li>
-      </ul>
+        </ListItem>
+      </List>
     ));
   };
 
@@ -66,16 +77,14 @@ const APIGenerator = () => {
   };
 
   function downloadFile(url) {
-    const link = document.createElement('a');
+    const link = document.createElement("a");
     link.href = url;
-    link.setAttribute('download', '');
-    link.style.display = 'none';
+    link.setAttribute("download", "");
+    link.style.display = "none";
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
   }
-
-  
 
   const dbOperations = [
     "Add",
@@ -95,8 +104,8 @@ const APIGenerator = () => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ models, routers : selOperations, dbOptions : dbConfig }),
-    })
+      body: JSON.stringify({ models, routers: selOperations }),
+    });
 
     console.log(res.status);
 
@@ -109,59 +118,55 @@ const APIGenerator = () => {
 
   const showOperations = () => {
     return dbOperations.map((op) => (
-      <div class="form-check">
-        <input
-          class="form-check-input"
-          type="checkbox"
-          id="flexCheckDefault"
-          checked={selOperations.includes(op)}
-          onChange={(e) => {
-            if (e.target.checked) {
-                setSelOperations([...selOperations, op]);
-            } else {
-                setSelOperations(selOperations.filter((sop) => sop !== op));
-            }
-          }}
-        />
-        <label class="form-check-label" htmlFor="flexCheckDefault">
-          {op}
-        </label>
-      </div>
+      <FormControlLabel
+        key={op}
+        control={
+          <Checkbox
+            checked={selOperations.includes(op)}
+            onChange={(e) => handleOperationChange(e.target.checked, op)}
+          />
+        }
+        label={op}
+      />
     ));
   };
 
+  const handleOperationChange = (checked, operation) => {
+    if (checked) {
+      setSelOperations((prevOperations) => [...prevOperations, operation]);
+    } else {
+      setSelOperations((prevOperations) =>
+        prevOperations.filter((op) => op !== operation)
+      );
+    }
+  };
+
   return (
-    <div>
-      <div className="container">
-        <div className="card">
-          <div className="card-header">
-            <div className="d-flex justify-content-between">
-              <h3>Select Models</h3>
-              <button className="btn btn-primary" onClick={generateAPI}>
-                Generate API
-              </button>
-            </div>
-          </div>
-          <div className="card-body">
-            {displayModels()}
-            <button onClick={addNewModel} className="btn btn-primary">Add New Model</button>
-          </div>
-        </div>
-        <div className="card">
-          <div className="card-header">
-            <div className="d-flex justify-content-between">
-              <h3>Configure Database Operations</h3>
-              <button className="btn btn-primary" onClick={generateAPI}>
-                Generate API
-              </button>
-            </div>
-          </div>
-          <div className="card-body">
-            {showOperations()}
-          </div>
-        </div>
-      </div>
-    </div>
+    <Container>
+      <Card sx={{ mb: 4 }}>
+        <CardHeader
+          title="Select Models"
+          action={
+            <Button variant="contained" onClick={generateAPI}>
+              Generate API
+            </Button>
+          }
+        />
+        <CardContent>{displayModels()}</CardContent>
+        <Button onClick={addNewModel}>Add New Model</Button>
+      </Card>
+      <Card>
+        <CardHeader
+          title="Configure Database Operations"
+          action={
+            <Button variant="contained" onClick={generateAPI}>
+              Generate API
+            </Button>
+          }
+        />
+        <CardContent>{showOperations()}</CardContent>
+      </Card>
+    </Container>
   );
 };
 

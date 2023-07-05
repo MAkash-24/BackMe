@@ -1,10 +1,10 @@
-import { useFormik } from "formik";
 import React from "react";
+import { useFormik } from "formik";
+import { Box, Button, Container, TextField, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import Swal from "sweetalert2";
+import { Alert } from "@mui/lab";
 
 const Login = () => {
-
   const navigate = useNavigate();
 
   const loginForm = useFormik({
@@ -26,79 +26,68 @@ const Login = () => {
       console.log(res.status);
 
       if (res.status === 200) {
-        Swal.fire({
-          icon: "success",
-          title: "Nice",
-          text: "You have successfully logged in",
-        });
-        const data =  await res.json();
+        const data = await res.json();
+        sessionStorage.setItem("user", JSON.stringify(data));
 
-        sessionStorage.setItem('user', JSON.stringify(data));
-        navigate('/user/profile');
-
+        navigate("/user/userLanding");
       } else if (res.status === 401) {
-        Swal.fire({
-          icon: "error",
-          title: "Error!!",
-          text: "Invalid Credentials",
-        });
+        // Show error message
       }
     },
   });
 
   return (
-    <div
-      className="homeBack"
-    >
-      <div className="container-fluid py-5">
+    <div className="homeBack">
+      <Container maxWidth="sm" py={5}>
         <div className="row d-flex justify-content-center align-items-center h-100">
           <div className="col-12 col-md-8 col-lg-6 col-xl-5">
-            <div
-              className="card bg-dark text-white"
-              style={{ borderRadius: "1rem" }}
-            >
+            <Box className="card bg-dark text-white" mt={4} style={{ borderRadius: "1rem", minWidth:"400px" }}>
               <div className="card-body p-5 text-center">
                 <form onSubmit={loginForm.handleSubmit}>
                   <div className="mb-md-5 mt-md-4 pb-5">
-                    <h2 className="fw-bold mb-2 text-uppercase">Login</h2>
-                    <p className="text-white-50 mb-5">
+                    <Typography variant="h4" className="fw-bold mb-2 text-uppercase">
+                      Login
+                    </Typography>
+                    <Typography variant="body1" className="text-white-50 mb-5">
                       Please enter your login and password!
-                    </p>
+                    </Typography>
                     <div className="form-white mb-4">
-                      <label className="form-label" htmlFor="typeEmailX">
-                        Email
-                      </label>
-                      <input
-                        type="email"
+                      <TextField
                         id="email"
+                        label="Email"
+                        variant="outlined"
+                        fullWidth
+                        size="large"
                         value={loginForm.values.email}
                         onChange={loginForm.handleChange}
-                        className="form-control form-control-lg"
                       />
                     </div>
-                    <div className=" form-white mb-4">
-                      <label className="form-label" htmlFor="typePasswordX">
-                        Password
-                      </label>
-                      <input
-                        type="password"
+                    <div className="form-white mb-4">
+                      <TextField
                         id="password"
+                        label="Password"
+                        type="password"
+                        variant="outlined"
+                        fullWidth
+                        size="large"
                         value={loginForm.values.password}
                         onChange={loginForm.handleChange}
-                        className="form-control form-control-lg"
                       />
                     </div>
-                    <p className="small mb-5 pb-lg-2">
+                    <Typography variant="body2" className="small mb-5 pb-lg-2">
                       <a className="text-white-50" href="#!">
                         Forgot password?
                       </a>
-                    </p>
-                    <button
-                      className="btn btn-outline-light btn-lg px-5"
+                    </Typography>
+                    <Button
+                      variant="outlined"
+                      color="primary"
+                      size="large"
+                      fullWidth
                       type="submit"
                     >
                       Login
-                    </button>
+                    </Button>
                     <div className="d-flex justify-content-center text-center mt-4 pt-1">
                       <a href="#!" className="text-white">
                         <i className="fab fa-facebook-f fa-lg" />
@@ -112,20 +101,20 @@ const Login = () => {
                     </div>
                   </div>
                   <div>
-                    <p className="mb-0">
+                    <Typography variant="body2" className="mb-0">
                       Don't have an account?{" "}
                       <a href="#!" className="text-white-50 fw-bold">
                         Sign Up
                       </a>
-                    </p>
+                    </Typography>
                   </div>
                 </form>
               </div>
-            </div>
+            </Box>
           </div>
         </div>
-      </div>
-       </div>
+      </Container>
+    </div>
   );
 };
 

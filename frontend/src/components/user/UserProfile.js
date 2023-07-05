@@ -1,315 +1,322 @@
 import React, { useState } from "react";
+import { NavLink } from "react-router-dom";
+import {
+  Box,
+  Button,
+  Card,
+  CardContent,
+  Container,
+  Grid,
+  LinearProgress,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  Typography,
+} from "@mui/material";
+import Avatar from "@mui/material/Avatar";
 
 const UserProfile = () => {
-
-  const [currentUser, setCurrentUser] = useState(JSON.parse(sessionStorage.getItem('user')));
+  const [currentUser] = useState(JSON.parse(sessionStorage.getItem("user")));
 
   return (
     <div>
-      <section style={{ backgroundColor: "#eee" }}>
-        <div className="container py-5">
+      <Box style={{ backgroundColor: "#eee" }}>
+        <Container className="container py-5">
           <div className="row">
-            <div className="col">
-              <nav
+            {/* <div className="col">
+              <Breadcrumb
                 aria-label="breadcrumb"
                 className="bg-light rounded-3 p-3 mb-4"
               >
-                <ol className="breadcrumb mb-0">
-                  <li className="breadcrumb-item">
-                    <a href="#">Home</a>
-                  </li>
-                  <li className="breadcrumb-item">
-                    <a href="#">User</a>
-                  </li>
-                  <li className="breadcrumb-item active" aria-current="page">
-                    User Profile
-                  </li>
-                </ol>
-              </nav>
-            </div>
+                <Breadcrumb.Item>
+                  <NavLink to="/home">Home</NavLink>
+                </Breadcrumb.Item>
+                <Breadcrumb.Item>
+                  <NavLink to="/profile">User</NavLink>
+                </Breadcrumb.Item>
+                <Breadcrumb.Item active aria-current="page">
+                  User Profile
+                </Breadcrumb.Item>
+              </Breadcrumb>
+            </div> */}
           </div>
-          <div className="row">
-            <div className="col-lg-4">
-              <div className="card mb-4">
-                <div className="card-body text-center">
-                  <img
+          <Grid container spacing={4}>
+            <Grid item lg={4}>
+              <Card mb={4}>
+                <CardContent>
+                  <Avatar
                     src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
                     alt="avatar"
                     className="rounded-circle img-fluid"
-                    style={{ width: 150 }}
+                    sx={{ width: 150, height: 150, mx: "auto" }}
                   />
-                  <h5 className="my-3">{currentUser.name}</h5>
-                  <p className="text-muted mb-1">Full Stack Developer</p>
-                  <p className="text-muted mb-4">Bay Area, San Francisco, CA</p>
-                  <div className="d-flex justify-content-center mb-2">
-                    <button type="button" className="btn btn-primary">
+                  <Typography variant="h5" my={3} align="center">
+                    {currentUser.name}
+                  </Typography>
+                  <Typography
+                    variant="body1"
+                    color="textSecondary"
+                    mb={1}
+                    align="center"
+                  >
+                    Full Stack Developer
+                  </Typography>
+                  <Typography
+                    variant="body1"
+                    color="textSecondary"
+                    mb={4}
+                    align="center"
+                  >
+                    Lucknow, Uttar Pradesh.
+                  </Typography>
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      marginBottom: 2,
+                    }}
+                  >
+                    <Button variant="contained" color="primary">
                       Follow
-                    </button>
-                    <button
-                      type="button"
-                      className="btn btn-outline-primary ms-1"
+                    </Button>
+                    <Button
+                      variant="outlined"
+                      color="primary"
+                      sx={{ marginLeft: 1 }}
                     >
                       Message
-                    </button>
+                    </Button>
                   </div>
-                </div>
-              </div>
-              <div className="card mb-4 mb-lg-0">
-                <div className="card-body p-0">
+                </CardContent>
+              </Card>
+              <Card>
+                <CardContent>
                   <ul className="list-group list-group-flush rounded-3">
-                    <li className="list-group-item d-flex justify-content-between align-items-center p-3">
-                      <i className="fas fa-globe fa-lg text-warning" />
-                      <p className="mb-0">https://mdbootstrap.com</p>
-                    </li>
-                    <li className="list-group-item d-flex justify-content-between align-items-center p-3">
-                      <i
-                        className="fab fa-github fa-lg"
-                        style={{ color: "#333333" }}
-                      />
-                      <p className="mb-0">mdbootstrap</p>
-                    </li>
-                    <li className="list-group-item d-flex justify-content-between align-items-center p-3">
-                      <i
-                        className="fab fa-twitter fa-lg"
-                        style={{ color: "#55acee" }}
-                      />
-                      <p className="mb-0">@mdbootstrap</p>
-                    </li>
-                    <li className="list-group-item d-flex justify-content-between align-items-center p-3">
-                      <i
-                        className="fab fa-instagram fa-lg"
-                        style={{ color: "#ac2bac" }}
-                      />
-                      <p className="mb-0">mdbootstrap</p>
-                    </li>
-                    <li className="list-group-item d-flex justify-content-between align-items-center p-3">
-                      <i
-                        className="fab fa-facebook-f fa-lg"
-                        style={{ color: "#3b5998" }}
-                      />
-                      <p className="mb-0">mdbootstrap</p>
-                    </li>
+                    <ListItem>
+                      <ListItemIcon>
+                        <i className="fas fa-globe fa-lg text-warning" />
+                      </ListItemIcon>
+                      <ListItemText primary="https://digvijay-singh.netlify.app/" />
+                    </ListItem>
+                    <ListItem>
+                      <ListItemIcon>
+                        <i
+                          className="fab fa-github fa-lg"
+                          style={{ color: "#333333" }}
+                        />
+                      </ListItemIcon>
+                      <ListItemText primary="https://github.com//valiantguardian" />
+                    </ListItem>
+                    <ListItem>
+                      <ListItemIcon>
+                        <i
+                          className="fab fa-twitter fa-lg"
+                          style={{ color: "#55acee" }}
+                        />
+                      </ListItemIcon>
+                      <ListItemText primary="@singhdigvijay74" />
+                    </ListItem>
+                    <ListItem>
+                      <ListItemIcon>
+                        <i
+                          className="fab fa-instagram fa-lg"
+                          style={{ color: "#ac2bac" }}
+                        />
+                      </ListItemIcon>
+                      <ListItemText primary="-.digvijay.-.singh.-" />
+                    </ListItem>
+                    <ListItem>
+                      <ListItemIcon>
+                        <i
+                          className="fab fa-facebook-f fa-lg"
+                          style={{ color: "#3b5998" }}
+                        />
+                      </ListItemIcon>
+                      <ListItemText primary="Digvijay Singh" />
+                    </ListItem>
                   </ul>
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-8">
-              <div className="card mb-4">
-                <div className="card-body">
+                </CardContent>
+              </Card>
+            </Grid>
+            <Grid item lg={8}>
+              <Card mb={4}>
+                <CardContent>
                   <div className="row">
                     <div className="col-sm-3">
-                      <p className="mb-0">Full Name</p>
+                      <Typography variant="body1" mb={0}>
+                        Full Name
+                      </Typography>
                     </div>
                     <div className="col-sm-9">
-                      <p className="text-muted mb-0">{currentUser.name}</p>
+                      <Typography variant="body2" color="textSecondary" mb={0}>
+                        {currentUser.name}
+                      </Typography>
                     </div>
                   </div>
                   <hr />
                   <div className="row">
                     <div className="col-sm-3">
-                      <p className="mb-0">Email</p>
+                      <Typography variant="body1" mb={0}>
+                        Email
+                      </Typography>
                     </div>
                     <div className="col-sm-9">
-                      <p className="text-muted mb-0">{currentUser.email}</p>
+                      <Typography variant="body2" color="textSecondary" mb={0}>
+                        {currentUser.email}
+                      </Typography>
                     </div>
                   </div>
                   <hr />
                   <div className="row">
                     <div className="col-sm-3">
-                      <p className="mb-0">Phone</p>
+                      <Typography variant="body1" mb={0}>
+                        Phone
+                      </Typography>
                     </div>
                     <div className="col-sm-9">
-                      <p className="text-muted mb-0">(097) 234-5678</p>
+                      <Typography variant="body2" color="textSecondary" mb={0}>
+                        (097) 234-5678
+                      </Typography>
                     </div>
                   </div>
                   <hr />
                   <div className="row">
                     <div className="col-sm-3">
-                      <p className="mb-0">Mobile</p>
+                      <Typography variant="body1" mb={0}>
+                        Mobile
+                      </Typography>
                     </div>
                     <div className="col-sm-9">
-                      <p className="text-muted mb-0">(098) 765-4321</p>
+                      <Typography variant="body2" color="textSecondary" mb={0}>
+                        (+91) 987-6543-210
+                      </Typography>
                     </div>
                   </div>
                   <hr />
                   <div className="row">
                     <div className="col-sm-3">
-                      <p className="mb-0">Address</p>
+                      <Typography variant="body1" mb={0}>
+                        Address
+                      </Typography>
                     </div>
                     <div className="col-sm-9">
-                      <p className="text-muted mb-0">
-                        Bay Area, San Francisco, CA
-                      </p>
+                      <Typography variant="body2" color="textSecondary" mb={0}>
+                        Lucknow, Uttar Pradesh
+                      </Typography>
                     </div>
                   </div>
-                </div>
-              </div>
-              <div className="row">
-                <div className="col-md-6">
-                  <div className="card mb-4 mb-md-0">
-                    <div className="card-body">
-                      <p className="mb-4">
+                </CardContent>
+              </Card>
+              <Grid container spacing={4}>
+                <Grid item md={6}>
+                  <Card mb={4}>
+                    <CardContent>
+                      <Typography variant="body1" mb={4}>
                         <span className="text-primary font-italic me-1">
                           assigment
                         </span>{" "}
                         Project Status
-                      </p>
-                      <p className="mb-1" style={{ fontSize: ".77rem" }}>
+                      </Typography>
+                      <Typography variant="body2" color="textSecondary" mb={1}>
                         Web Design
-                      </p>
-                      <div className="progress rounded" style={{ height: 5 }}>
-                        <div
-                          className="progress-bar"
-                          role="progressbar"
-                          style={{ width: "80%" }}
-                          aria-valuenow={80}
-                          aria-valuemin={0}
-                          aria-valuemax={100}
-                        />
-                      </div>
-                      <p className="mt-4 mb-1" style={{ fontSize: ".77rem" }}>
-                        Website Markup
-                      </p>
-                      <div className="progress rounded" style={{ height: 5 }}>
-                        <div
-                          className="progress-bar"
-                          role="progressbar"
-                          style={{ width: "72%" }}
-                          aria-valuenow={72}
-                          aria-valuemin={0}
-                          aria-valuemax={100}
-                        />
-                      </div>
-                      <p className="mt-4 mb-1" style={{ fontSize: ".77rem" }}>
-                        One Page
-                      </p>
-                      <div className="progress rounded" style={{ height: 5 }}>
-                        <div
-                          className="progress-bar"
-                          role="progressbar"
-                          style={{ width: "89%" }}
-                          aria-valuenow={89}
-                          aria-valuemin={0}
-                          aria-valuemax={100}
-                        />
-                      </div>
-                      <p className="mt-4 mb-1" style={{ fontSize: ".77rem" }}>
-                        Mobile Template
-                      </p>
-                      <div className="progress rounded" style={{ height: 5 }}>
-                        <div
-                          className="progress-bar"
-                          role="progressbar"
-                          style={{ width: "55%" }}
-                          aria-valuenow={55}
-                          aria-valuemin={0}
-                          aria-valuemax={100}
-                        />
-                      </div>
-                      <p className="mt-4 mb-1" style={{ fontSize: ".77rem" }}>
-                        Backend API
-                      </p>
-                      <div
-                        className="progress rounded mb-2"
-                        style={{ height: 5 }}
+                      </Typography>
+                      <LinearProgress variant="determinate" value={80} />
+                      <Typography
+                        variant="body2"
+                        color="textSecondary"
+                        mt={4}
+                        mb={1}
                       >
-                        <div
-                          className="progress-bar"
-                          role="progressbar"
-                          style={{ width: "66%" }}
-                          aria-valuenow={66}
-                          aria-valuemin={0}
-                          aria-valuemax={100}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-md-6">
-                  <div className="card mb-4 mb-md-0">
-                    <div className="card-body">
-                      <p className="mb-4">
+                        Website Markup
+                      </Typography>
+                      <LinearProgress variant="determinate" value={72} />
+                      <Typography
+                        variant="body2"
+                        color="textSecondary"
+                        mt={4}
+                        mb={1}
+                      >
+                        One Page
+                      </Typography>
+                      <LinearProgress variant="determinate" value={89} />
+                      <Typography
+                        variant="body2"
+                        color="textSecondary"
+                        mt={4}
+                        mb={1}
+                      >
+                        Mobile Template
+                      </Typography>
+                      <LinearProgress variant="determinate" value={55} />
+                      <Typography
+                        variant="body2"
+                        color="textSecondary"
+                        mt={4}
+                        mb={1}
+                      >
+                        Backend API
+                      </Typography>
+                      <LinearProgress variant="determinate" value={66} />
+                    </CardContent>
+                  </Card>
+                </Grid>
+                <Grid item md={6}>
+                  <Card mb={4}>
+                    <CardContent>
+                      <Typography variant="body1" mb={4}>
                         <span className="text-primary font-italic me-1">
                           assigment
                         </span>{" "}
                         Project Status
-                      </p>
-                      <p className="mb-1" style={{ fontSize: ".77rem" }}>
+                      </Typography>
+                      <Typography variant="body2" color="textSecondary" mb={1}>
                         Web Design
-                      </p>
-                      <div className="progress rounded" style={{ height: 5 }}>
-                        <div
-                          className="progress-bar"
-                          role="progressbar"
-                          style={{ width: "80%" }}
-                          aria-valuenow={80}
-                          aria-valuemin={0}
-                          aria-valuemax={100}
-                        />
-                      </div>
-                      <p className="mt-4 mb-1" style={{ fontSize: ".77rem" }}>
-                        Website Markup
-                      </p>
-                      <div className="progress rounded" style={{ height: 5 }}>
-                        <div
-                          className="progress-bar"
-                          role="progressbar"
-                          style={{ width: "72%" }}
-                          aria-valuenow={72}
-                          aria-valuemin={0}
-                          aria-valuemax={100}
-                        />
-                      </div>
-                      <p className="mt-4 mb-1" style={{ fontSize: ".77rem" }}>
-                        One Page
-                      </p>
-                      <div className="progress rounded" style={{ height: 5 }}>
-                        <div
-                          className="progress-bar"
-                          role="progressbar"
-                          style={{ width: "89%" }}
-                          aria-valuenow={89}
-                          aria-valuemin={0}
-                          aria-valuemax={100}
-                        />
-                      </div>
-                      <p className="mt-4 mb-1" style={{ fontSize: ".77rem" }}>
-                        Mobile Template
-                      </p>
-                      <div className="progress rounded" style={{ height: 5 }}>
-                        <div
-                          className="progress-bar"
-                          role="progressbar"
-                          style={{ width: "55%" }}
-                          aria-valuenow={55}
-                          aria-valuemin={0}
-                          aria-valuemax={100}
-                        />
-                      </div>
-                      <p className="mt-4 mb-1" style={{ fontSize: ".77rem" }}>
-                        Backend API
-                      </p>
-                      <div
-                        className="progress rounded mb-2"
-                        style={{ height: 5 }}
+                      </Typography>
+                      <LinearProgress variant="determinate" value={80} />
+                      <Typography
+                        variant="body2"
+                        color="textSecondary"
+                        mt={4}
+                        mb={1}
                       >
-                        <div
-                          className="progress-bar"
-                          role="progressbar"
-                          style={{ width: "66%" }}
-                          aria-valuenow={66}
-                          aria-valuemin={0}
-                          aria-valuemax={100}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+                        Website Markup
+                      </Typography>
+                      <LinearProgress variant="determinate" value={72} />
+                      <Typography
+                        variant="body2"
+                        color="textSecondary"
+                        mt={4}
+                        mb={1}
+                      >
+                        One Page
+                      </Typography>
+                      <LinearProgress variant="determinate" value={89} />
+                      <Typography
+                        variant="body2"
+                        color="textSecondary"
+                        mt={4}
+                        mb={1}
+                      >
+                        Mobile Template
+                      </Typography>
+                      <LinearProgress variant="determinate" value={55} />
+                      <Typography
+                        variant="body2"
+                        color="textSecondary"
+                        mt={4}
+                        mb={1}
+                      >
+                        Backend API
+                      </Typography>
+                      <LinearProgress variant="determinate" value={66} />
+                    </CardContent>
+                  </Card>
+                </Grid>
+              </Grid>
+            </Grid>
+          </Grid>
+        </Container>
+      </Box>
     </div>
   );
 };

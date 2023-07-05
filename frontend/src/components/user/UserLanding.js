@@ -1,51 +1,65 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import {
+  Container,
+  Card,
+  CardContent,
+  Typography,
+  Grid,
+  Button
+} from "@mui/material";
 
 const UserLanding = () => {
   return (
-    <div>
-      <div className="container-fluid my-5 py-5">
-        <div className="card shadow-lg">
-          <h5 className="card-title display-2 p-5">BackMD </h5>
-          <div className="row">
-            <div className="col-sm-6">
-              <div className="card">
-                <div className="card-body">
-                  <h5 className="card-title display-4">Get API </h5>
-                  <p className="card-text">
-                    With supporting text below as a natural lead-in to
-                    additional content.
-                  </p>
-                  <NavLink
-                    className="nav-link btn btn-primary text-light"
-                    to="/user/apiGenerator"
-                  >
-                    Generate Backend API
-                  </NavLink>
-                </div>
-              </div>
-            </div>
-            <div className="col-sm-6">
-              <div className="card">
-                <div className="card-body">
-                  <h5 className="card-title display-4">Migrate Data </h5>
-                  <p className="card-text">
-                    With supporting text below as a natural lead-in to
-                    additional content.
-                  </p>
-                  <NavLink
-                    className="nav-link btn btn-primary text-light"
-                    to="/user/databaseConverter"
-                  >
-                    Migrate data
-                  </NavLink>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <Container maxWidth="md" className="my-5 py-5">
+      <Card className="shadow-lg">
+        <Typography variant="h4" component="h1" align="center" className="p-5">
+          BackME
+        </Typography>
+        <Grid container spacing={2}>
+          <Grid item xs={12} sm={6}>
+            <Card>
+              <CardContent>
+                <Typography variant="h5" component="h2" gutterBottom>
+                  Get API
+                </Typography>
+                <Typography variant="body2" component="p">
+                  With supporting text below as a natural lead-in to additional content.
+                </Typography>
+                <Button
+                  component={NavLink}
+                  to="/user/apiGenerator"
+                  variant="contained"
+                  color="primary"
+                >
+                  Generate Backend API
+                </Button>
+              </CardContent>
+            </Card>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <Card>
+              <CardContent>
+                <Typography variant="h5" component="h2" gutterBottom>
+                  Migrate Data
+                </Typography>
+                <Typography variant="body2" component="p">
+                  With supporting text below as a natural lead-in to additional content.
+                </Typography>
+                <Button
+                  component={NavLink}
+                  to="/user/databaseConverter"
+                  variant="contained"
+                  color="primary"
+                >
+                  Migrate data
+                </Button>
+              </CardContent>
+            </Card>
+          </Grid>
+        </Grid>
+      </Card>
+    </Container>
   );
 };
 

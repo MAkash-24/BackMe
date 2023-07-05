@@ -106,7 +106,7 @@ const addOperation = () => {
   return `router.post('/add', (req, res) => {
 new Model(req.body).save()
 .then((result) => {
-    res.json(result);    
+    res.json(result);
 })
 .catch((err) => {
     console.error(err);
