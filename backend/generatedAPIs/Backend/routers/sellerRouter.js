@@ -1,4 +1,4 @@
-const Model = require('../models/UserModel');
+const Model = require('../models/sellerModel');
 
 router.get('/get', (req,res)=> {
 Model.find({})

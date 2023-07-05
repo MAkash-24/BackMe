@@ -100,12 +100,8 @@ const getMongoData = async ({ uri, collectionName }, cb) => {
   const db = client.db();
   const collection = db.collection(collectionName);
   // console.log(collection);
-  collection.find({}).toArray((err, data) => {
-    if (err) throw err;
-    console.log(data);
-    cb(data);
-    client.close();
-  });
+  const result = await collection.find();
+  cb(await result.toArray());
 };
 
 const storeMySQLData = (
@@ -123,8 +119,9 @@ const storeMySQLData = (
   connection.connect((err) => {
     if (err) throw err;
     console.log("Connected successfully to MySQL");
-
-    const values = data.map((item) => Object.values(item));
+    // console.log(data.map((item) => Object.values(item).slice(1)));
+    // return;
+    const values = data.map((item) => Object.values(item).slice(1));
     const query = `INSERT INTO ${table} VALUES ?`;
 
     connection.query(query, [values], (err, result) => {

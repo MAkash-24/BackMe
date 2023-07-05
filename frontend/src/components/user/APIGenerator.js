@@ -112,7 +112,7 @@ const APIGenerator = () => {
     const data = await res.json();
     console.log(data);
     if(data){
-      // downloadFile(data.url);   
+      downloadFile(data.url);   
     }
   };
 
@@ -143,14 +143,9 @@ const APIGenerator = () => {
 
   return (
     <Container>
-      <Card sx={{ mb: 4 }}>
+      <Card sx={{ my: 4 }}>
         <CardHeader
           title="Select Models"
-          action={
-            <Button variant="contained" onClick={generateAPI}>
-              Generate API
-            </Button>
-          }
         />
         <CardContent>{displayModels()}</CardContent>
         <Button onClick={addNewModel}>Add New Model</Button>

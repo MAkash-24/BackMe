@@ -4,4 +4,4 @@ const schema = new Schema({
     field1 : {type : String}
 });
 
-module.exports = model('unititled', schema);
+module.exports = model('products', schema);

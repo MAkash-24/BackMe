@@ -207,7 +207,7 @@ const DatabaseConvertor = () => {
 
             <FormControl sx={{ my: 2 }}>
               <Select
-                value={dbFirst ? dbFirst.name : ""}
+                value={0}
                 onChange={selectDatabaseOne}
                 sx={{ width: "200px" }}
               >
@@ -219,7 +219,7 @@ const DatabaseConvertor = () => {
               </Select>
             </FormControl>
 
-            {dbFirst && <DatabaseConfigOne />}
+            {dbFirst && DatabaseConfigOne()}
           </div>
           <div className="col-md-6">
             <Typography variant="h4">Select Second Database</Typography>
@@ -248,7 +248,7 @@ const DatabaseConvertor = () => {
 
             <FormControl sx={{ my: 2 }}>
               <Select
-                value={dbSecond ? dbSecond.name : ""}
+                value={0}
                 onChange={selectDatabaseTwo}
                 sx={{ width: "200px" }}
               >
@@ -260,7 +260,7 @@ const DatabaseConvertor = () => {
               </Select>
             </FormControl>
 
-            {dbSecond && <DatabaseConfigTwo />}
+            {dbSecond && DatabaseConfigTwo()}
           </div>
         </div>
         <Button variant="contained" color="primary" onClick={startConversion}>

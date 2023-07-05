@@ -12,11 +12,13 @@ import UserLanding from "./components/user/UserLanding";
 import DatabaseConvertor from "./components/user/DatabaseConvertor";
 import APIGenerator from "./components/user/APIGenerator";
 import Feedback from "./components/user/Feedback";
+import UserProvider from "./context/UserProvider";
 function App() {
   return (
     <div>
 
       <BrowserRouter>
+      <UserProvider>
         <Routes>
           <Route path="/" element={<Navigate to="/main/home" />} />
           <Route path="main" element={<Main />} >
@@ -35,6 +37,7 @@ function App() {
             <Route path="apiGenerator" element={<APIGenerator/>}/>
           </Route>
         </Routes>
+      </UserProvider>
       </BrowserRouter>
     </div>
   );

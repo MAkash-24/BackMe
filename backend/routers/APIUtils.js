@@ -8,7 +8,7 @@ const { apiStructure } = api_config;
 const BASE_PATH = path.join(__dirname, "../generatedAPIs/Backend");
 
 
-const createZip = (path, zipName) => {
+const createZip = (path, zipName, cb) => {
     // Create a new ZIP archive
     const archive = archiver("zip", { zlib: { level: 9 } });
   
@@ -35,13 +35,14 @@ const createZip = (path, zipName) => {
     // Log a message when the archive is finished
     output.on("close", function () {
       console.log(`Successfully created ZIP archive at ${outputFilePath}`);
+      cb(outputFilePath);
     });
 };
 
 const createFile = (filename, content) => {
     fs.writeFile(filename, content, (err) => {
       if (err) throw err;
-      console.log(`File '${filename}' has been saved.`);
+      // console.log(`File '${filename}' has been saved.`);
     });
   };
   
@@ -65,7 +66,7 @@ const routerCreater = (models, operations) => {
   checkFolderCreated(`${BASE_PATH}/routers`);
     models.forEach((model) => {
         const {name} = model;
-        console.log(apiStructure.getRouterCode(name, operations), 'sdsd');
+        // console.log(apiStructure.getRouterCode(name, operations), 'sdsd');
         createFile(`${BASE_PATH}/routers/${name}Router.js`, apiStructure.getRouterCode(name, operations));
     })
 };
@@ -83,15 +84,17 @@ const indexCreator = (routers) => {
 };
 
 const APIGenerator = ({models, routers, dbOptions}, cb) => {
-    console.log(BASE_PATH);
+    // console.log(BASE_PATH);
     checkFolderCreated(BASE_PATH);
     modelCreater(models);
     routerCreater(models, routers);
     connectionCreator(dbOptions);
     packageCreator();
     indexCreator(routers);
-    createZip(BASE_PATH, `backendAPI.zip`);
-    cb(`backendAPI.zip`);
+    createZip(BASE_PATH, `backendAPI.zip`, (file) => {
+      // console.log(file);
+      cb(`backendAPI.zip`);
+    });
 }
 
 module.exports = APIGenerator;

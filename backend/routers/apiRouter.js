@@ -5,16 +5,16 @@ const APIGenerator = require('./APIUtils');
 
 router.post('/generate', (req, res) => { 
 
-    console.log(req.body);
+    // console.log(req.body);
     const { models, routers, dbOptions } = req.body;
-    console.log(routers);
+    // console.log(routers);
     APIGenerator({models, routers, dbOptions}, (file) => {
-        console.log(file);
+        // console.log(file);
+        res.json({
+            url : `http://localhost:5000/${file}`,
+        });
     });
 
-    res.json({
-        url : 'http://localhost:5000/backendAPI.zip',
-    });
 });
 
 router.post('/add', (req, res) => { 
